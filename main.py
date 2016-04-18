@@ -5,6 +5,10 @@ import time
 import json
 import urllib
 
+
+def getBTCPrice():
+	return requests.get("https://www.bitstamp.net/api/ticker/").json()["last"]
+
 def getCryptoPrice(only):
 	data = requests.get("https://poloniex.com/public?command=returnTicker").json()
 	prices = {}
@@ -64,5 +68,7 @@ def displayCrypto():
 
 		print("")
 
-	print("Total in BTC : %fBTC" %(total))
+
+	btcusd = float(getBTCPrice())
+	print("Total in BTC : %fBTC (%f USD)" %(total,total*btcusd))
 displayCrypto()
